@@ -32,7 +32,7 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
             ("{0}".format("5.15")))  # Default value for real stock price
         self.earningTextEdit.setPlainText(
             ("{0}".format("0.0")))  # Default value for earnings
-        self.setWindowIcon(QtGui.QIcon('images/logo.png'))  # Set logo to app
+        self.setWindowIcon(QtGui.QIcon('images/logo.ico'))  # Set logo to app
         # Add triggered event to help button
         self.menuHelp.triggered.connect(self.openDialogBox)
 
