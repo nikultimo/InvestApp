@@ -3,3 +3,7 @@ __pycache__
 output
 dist
 *.spec
+%
+
+# Zip archives
+*.zip
