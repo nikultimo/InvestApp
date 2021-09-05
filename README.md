@@ -2,7 +2,7 @@
 Investment app for better understanding your success in this sphere
 
 # Main window
-![image](https://user-images.githubusercontent.com/55857711/132039805-6e02c718-be08-47a7-9594-f98d2d5ee5a4.png)
+![image](https://user-images.githubusercontent.com/55857711/132130257-de9f4bbb-595e-4091-bc82-82e42e306a8c.png)
 
 # Main features
 Via this app you can get information about your income from buyed shares in rubles. 
@@ -21,16 +21,16 @@ Also you can measure a possible income from shares by changing real stock cost p
 
 # How to build this app?
 
-- If you want to convert .ui file from QT Designer to .py file:
+- Convert design file from QT Designer (.ui file) to python .py file:
 ```
   pyuic5 InvestApp.ui -o InvestApp.py
 ```
-- If you want to convert .py file to standalone executable (.exe):
+- Build executable (.exe) file from main.py:
 ```
   pip install auto-py-to-exe
   auto-py-to-exe
 ```
-  In this app you will need to specify script location, some icons and images if you have them and after that you can convert your application to .exe file
+  In this app you will need to specify main.py script location, some icons and images if you have them and after that you can convert your application to .exe file
   
 # Thanks for time!
 
