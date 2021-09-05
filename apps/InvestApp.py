@@ -35,27 +35,54 @@ class Ui_InvestApp(object):
         self.centralwidget.setMinimumSize(QtCore.QSize(420, 420))
         self.centralwidget.setStyleSheet("")
         self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.gridLayout = QtWidgets.QGridLayout()
-        self.gridLayout.setHorizontalSpacing(5)
-        self.gridLayout.setVerticalSpacing(10)
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
+        self.yourApiTokenLabel = QtWidgets.QLabel(self.centralwidget)
+        self.yourApiTokenLabel.setMinimumSize(QtCore.QSize(400, 15))
+        self.yourApiTokenLabel.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.yourApiTokenLabel.setObjectName("yourApiTokenLabel")
+        self.gridLayout.addWidget(self.yourApiTokenLabel, 0, 0, 1, 2)
+        self.apiTokenEditField = QtWidgets.QTextEdit(self.centralwidget)
+        self.apiTokenEditField.setMinimumSize(QtCore.QSize(400, 40))
+        self.apiTokenEditField.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.apiTokenEditField.setBaseSize(QtCore.QSize(0, 40))
+        self.apiTokenEditField.setStyleSheet("background-color: rgb(238, 238, 238);\n"
+"color: rgb(0, 0, 0);")
+        self.apiTokenEditField.setObjectName("apiTokenEditField")
+        self.gridLayout.addWidget(self.apiTokenEditField, 1, 0, 1, 2)
         self.stockNameLabel = QtWidgets.QLabel(self.centralwidget)
         self.stockNameLabel.setMinimumSize(QtCore.QSize(198, 15))
         self.stockNameLabel.setMaximumSize(QtCore.QSize(16777215, 15))
         self.stockNameLabel.setObjectName("stockNameLabel")
         self.gridLayout.addWidget(self.stockNameLabel, 2, 0, 1, 1)
-        self.youWillEarnLabel = QtWidgets.QLabel(self.centralwidget)
-        self.youWillEarnLabel.setMinimumSize(QtCore.QSize(400, 15))
-        self.youWillEarnLabel.setMaximumSize(QtCore.QSize(16777215, 15))
-        self.youWillEarnLabel.setObjectName("youWillEarnLabel")
-        self.gridLayout.addWidget(self.youWillEarnLabel, 11, 0, 1, 2)
-        self.averageCostOfStockLabel = QtWidgets.QLabel(self.centralwidget)
-        self.averageCostOfStockLabel.setMinimumSize(QtCore.QSize(400, 15))
-        self.averageCostOfStockLabel.setMaximumSize(QtCore.QSize(16777215, 15))
-        self.averageCostOfStockLabel.setObjectName("averageCostOfStockLabel")
-        self.gridLayout.addWidget(self.averageCostOfStockLabel, 7, 0, 1, 2)
+        self.realStockCostLabel = QtWidgets.QLabel(self.centralwidget)
+        self.realStockCostLabel.setMinimumSize(QtCore.QSize(198, 15))
+        self.realStockCostLabel.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.realStockCostLabel.setObjectName("realStockCostLabel")
+        self.gridLayout.addWidget(self.realStockCostLabel, 2, 1, 1, 1)
+        self.stockNameTextEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.stockNameTextEdit.setMinimumSize(QtCore.QSize(198, 30))
+        self.stockNameTextEdit.setMaximumSize(QtCore.QSize(16777215, 30))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.stockNameTextEdit.setFont(font)
+        self.stockNameTextEdit.setStyleSheet("background-color: rgb(238, 238, 238);\n"
+"color: rgb(0, 0, 0);")
+        self.stockNameTextEdit.setObjectName("stockNameTextEdit")
+        self.gridLayout.addWidget(self.stockNameTextEdit, 3, 0, 1, 1)
+        self.stockRealCostTextEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.stockRealCostTextEdit.setMinimumSize(QtCore.QSize(198, 30))
+        self.stockRealCostTextEdit.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.stockRealCostTextEdit.setStyleSheet("background-color: rgb(238, 238, 238);\n"
+"color: rgb(0, 0, 0);")
+        self.stockRealCostTextEdit.setObjectName("stockRealCostTextEdit")
+        self.gridLayout.addWidget(self.stockRealCostTextEdit, 3, 1, 1, 1)
+        self.getCostFromYFPushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.getCostFromYFPushButton.setMinimumSize(QtCore.QSize(198, 23))
+        self.getCostFromYFPushButton.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.getCostFromYFPushButton.setStyleSheet("background-color: rgb(74, 214, 163);")
+        self.getCostFromYFPushButton.setObjectName("getCostFromYFPushButton")
+        self.gridLayout.addWidget(self.getCostFromYFPushButton, 4, 0, 1, 2)
         self.amountOfStocksLabel = QtWidgets.QLabel(self.centralwidget)
         self.amountOfStocksLabel.setMinimumSize(QtCore.QSize(400, 15))
         self.amountOfStocksLabel.setMaximumSize(QtCore.QSize(16777215, 15))
@@ -68,20 +95,18 @@ class Ui_InvestApp(object):
 "color: rgb(0, 0, 0);")
         self.stockAmountTextEdit.setObjectName("stockAmountTextEdit")
         self.gridLayout.addWidget(self.stockAmountTextEdit, 6, 0, 1, 2)
-        self.line = QtWidgets.QFrame(self.centralwidget)
-        self.line.setMinimumSize(QtCore.QSize(400, 15))
-        self.line.setMaximumSize(QtCore.QSize(16777215, 15))
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line.setObjectName("line")
-        self.gridLayout.addWidget(self.line, 10, 0, 1, 2)
-        self.earningTextEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.earningTextEdit.setMinimumSize(QtCore.QSize(400, 30))
-        self.earningTextEdit.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.earningTextEdit.setStyleSheet("background-color: rgb(238, 238, 238);\n"
+        self.averageCostOfStockLabel = QtWidgets.QLabel(self.centralwidget)
+        self.averageCostOfStockLabel.setMinimumSize(QtCore.QSize(400, 15))
+        self.averageCostOfStockLabel.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.averageCostOfStockLabel.setObjectName("averageCostOfStockLabel")
+        self.gridLayout.addWidget(self.averageCostOfStockLabel, 7, 0, 1, 2)
+        self.stockAverageTextEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.stockAverageTextEdit.setMinimumSize(QtCore.QSize(400, 30))
+        self.stockAverageTextEdit.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.stockAverageTextEdit.setStyleSheet("background-color: rgb(238, 238, 238);\n"
 "color: rgb(0, 0, 0);")
-        self.earningTextEdit.setObjectName("earningTextEdit")
-        self.gridLayout.addWidget(self.earningTextEdit, 12, 0, 1, 2)
+        self.stockAverageTextEdit.setObjectName("stockAverageTextEdit")
+        self.gridLayout.addWidget(self.stockAverageTextEdit, 8, 0, 1, 2)
         self.calculateEarningPushButton = QtWidgets.QPushButton(self.centralwidget)
         self.calculateEarningPushButton.setMinimumSize(QtCore.QSize(400, 25))
         self.calculateEarningPushButton.setMaximumSize(QtCore.QSize(16777215, 25))
@@ -91,55 +116,25 @@ class Ui_InvestApp(object):
         self.calculateEarningPushButton.setFlat(False)
         self.calculateEarningPushButton.setObjectName("calculateEarningPushButton")
         self.gridLayout.addWidget(self.calculateEarningPushButton, 9, 0, 1, 2)
-        self.stockRealCostTextEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.stockRealCostTextEdit.setMinimumSize(QtCore.QSize(198, 30))
-        self.stockRealCostTextEdit.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.stockRealCostTextEdit.setStyleSheet("background-color: rgb(238, 238, 238);\n"
+        self.line = QtWidgets.QFrame(self.centralwidget)
+        self.line.setMinimumSize(QtCore.QSize(400, 15))
+        self.line.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.gridLayout.addWidget(self.line, 10, 0, 1, 2)
+        self.youWillEarnLabel = QtWidgets.QLabel(self.centralwidget)
+        self.youWillEarnLabel.setMinimumSize(QtCore.QSize(400, 15))
+        self.youWillEarnLabel.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.youWillEarnLabel.setObjectName("youWillEarnLabel")
+        self.gridLayout.addWidget(self.youWillEarnLabel, 11, 0, 1, 2)
+        self.earningTextEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.earningTextEdit.setMinimumSize(QtCore.QSize(400, 30))
+        self.earningTextEdit.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.earningTextEdit.setStyleSheet("background-color: rgb(238, 238, 238);\n"
 "color: rgb(0, 0, 0);")
-        self.stockRealCostTextEdit.setObjectName("stockRealCostTextEdit")
-        self.gridLayout.addWidget(self.stockRealCostTextEdit, 3, 1, 1, 1)
-        self.stockNameTextEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.stockNameTextEdit.setMinimumSize(QtCore.QSize(198, 30))
-        self.stockNameTextEdit.setMaximumSize(QtCore.QSize(16777215, 30))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.stockNameTextEdit.setFont(font)
-        self.stockNameTextEdit.setStyleSheet("background-color: rgb(238, 238, 238);\n"
-"color: rgb(0, 0, 0);")
-        self.stockNameTextEdit.setObjectName("stockNameTextEdit")
-        self.gridLayout.addWidget(self.stockNameTextEdit, 3, 0, 1, 1)
-        self.stockAverageTextEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.stockAverageTextEdit.setMinimumSize(QtCore.QSize(400, 30))
-        self.stockAverageTextEdit.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.stockAverageTextEdit.setStyleSheet("background-color: rgb(238, 238, 238);\n"
-"color: rgb(0, 0, 0);")
-        self.stockAverageTextEdit.setObjectName("stockAverageTextEdit")
-        self.gridLayout.addWidget(self.stockAverageTextEdit, 8, 0, 1, 2)
-        self.yourApiTokenLabel = QtWidgets.QLabel(self.centralwidget)
-        self.yourApiTokenLabel.setMinimumSize(QtCore.QSize(400, 15))
-        self.yourApiTokenLabel.setMaximumSize(QtCore.QSize(16777215, 15))
-        self.yourApiTokenLabel.setObjectName("yourApiTokenLabel")
-        self.gridLayout.addWidget(self.yourApiTokenLabel, 0, 0, 1, 2)
-        self.getCostFromYFPushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.getCostFromYFPushButton.setMinimumSize(QtCore.QSize(198, 23))
-        self.getCostFromYFPushButton.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.getCostFromYFPushButton.setStyleSheet("background-color: rgb(74, 214, 163);")
-        self.getCostFromYFPushButton.setObjectName("getCostFromYFPushButton")
-        self.gridLayout.addWidget(self.getCostFromYFPushButton, 4, 0, 1, 2)
-        self.apiTokenEditField = QtWidgets.QTextEdit(self.centralwidget)
-        self.apiTokenEditField.setMinimumSize(QtCore.QSize(400, 40))
-        self.apiTokenEditField.setMaximumSize(QtCore.QSize(16777215, 40))
-        self.apiTokenEditField.setBaseSize(QtCore.QSize(0, 40))
-        self.apiTokenEditField.setStyleSheet("background-color: rgb(238, 238, 238);\n"
-"color: rgb(0, 0, 0);")
-        self.apiTokenEditField.setObjectName("apiTokenEditField")
-        self.gridLayout.addWidget(self.apiTokenEditField, 1, 0, 1, 2)
-        self.realStockCostLabel = QtWidgets.QLabel(self.centralwidget)
-        self.realStockCostLabel.setMinimumSize(QtCore.QSize(198, 15))
-        self.realStockCostLabel.setMaximumSize(QtCore.QSize(16777215, 15))
-        self.realStockCostLabel.setObjectName("realStockCostLabel")
-        self.gridLayout.addWidget(self.realStockCostLabel, 2, 1, 1, 1)
-        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
+        self.earningTextEdit.setObjectName("earningTextEdit")
+        self.gridLayout.addWidget(self.earningTextEdit, 12, 0, 1, 2)
         InvestApp.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(InvestApp)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 420, 21))
@@ -164,38 +159,38 @@ class Ui_InvestApp(object):
     def retranslateUi(self, InvestApp):
         _translate = QtCore.QCoreApplication.translate
         InvestApp.setWindowTitle(_translate("InvestApp", "InvestApp"))
+        self.yourApiTokenLabel.setText(_translate("InvestApp", "Your API Token:"))
         self.stockNameLabel.setText(_translate("InvestApp", "Stock name"))
-        self.youWillEarnLabel.setText(_translate("InvestApp", "You will earn (in RUB):"))
-        self.averageCostOfStockLabel.setText(_translate("InvestApp", "Average cost of stock"))
+        self.realStockCostLabel.setText(_translate("InvestApp", "Real stock cost"))
+        self.stockNameTextEdit.setHtml(_translate("InvestApp", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">TAL</p></body></html>"))
+        self.stockRealCostTextEdit.setHtml(_translate("InvestApp", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">6</p></body></html>"))
+        self.getCostFromYFPushButton.setText(_translate("InvestApp", "Get real stock cost from Tinkoff API"))
         self.amountOfStocksLabel.setText(_translate("InvestApp", "Amount of stocks"))
         self.stockAmountTextEdit.setHtml(_translate("InvestApp", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">100</span></p></body></html>"))
-        self.earningTextEdit.setHtml(_translate("InvestApp", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">10000</p></body></html>"))
-        self.calculateEarningPushButton.setText(_translate("InvestApp", "Calculate"))
-        self.stockRealCostTextEdit.setHtml(_translate("InvestApp", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">6</p></body></html>"))
-        self.stockNameTextEdit.setHtml(_translate("InvestApp", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">TAL</p></body></html>"))
+        self.averageCostOfStockLabel.setText(_translate("InvestApp", "Average cost of stock"))
         self.stockAverageTextEdit.setHtml(_translate("InvestApp", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">5.31</p></body></html>"))
-        self.yourApiTokenLabel.setText(_translate("InvestApp", "Your API Token:"))
-        self.getCostFromYFPushButton.setText(_translate("InvestApp", "Get real stock cost from Tinkoff API"))
-        self.realStockCostLabel.setText(_translate("InvestApp", "Real stock cost"))
+        self.calculateEarningPushButton.setText(_translate("InvestApp", "Calculate"))
+        self.youWillEarnLabel.setText(_translate("InvestApp", "You will earn (in RUB):"))
+        self.earningTextEdit.setHtml(_translate("InvestApp", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">10000</p></body></html>"))
         self.menuHelp.setTitle(_translate("InvestApp", "Help"))
         self.actionInfo.setText(_translate("InvestApp", "Info"))
