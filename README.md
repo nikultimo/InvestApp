@@ -2,7 +2,7 @@
 Investment app for better understanding your success in this sphere
 
 # Main window
-![image](https://user-images.githubusercontent.com/55857711/132130257-de9f4bbb-595e-4091-bc82-82e42e306a8c.png)
+![image](https://user-images.githubusercontent.com/55857711/132236762-13621dac-d2fd-4506-818d-b736690aece5.png)
 
 # Main features
 Via this app you can get information about your income from buyed shares in rubles. 
@@ -15,9 +15,14 @@ It grabs the following info:
 3. Amount of shares that you bought
 4. Average cost of share
 
-So the whole information is collected with API.
+So the whole information is collected via API.
 And you can calculate the total income from any available stock in rubles. 
 Also you can measure a possible income from shares by changing real stock cost parameter. 
+
+# Main features
+1. Uses Tinkoff API Token
+2. Capable of importing / exporting API Token
+3. Capable of encrypting / decrypting the API Token file for secure using
 
 # How to build this app?
 

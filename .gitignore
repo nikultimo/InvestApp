@@ -7,3 +7,9 @@ dist
 
 # Zip archives
 *.zip
+
+# Text files
+*.txt
+
+# Encryption keys
+*.key
