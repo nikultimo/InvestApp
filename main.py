@@ -1,3 +1,4 @@
+from os import error
 import sys
 from typing import Type  # sys needs to transfer argv to QApplication
 from PyQt5 import QtWidgets
@@ -5,7 +6,8 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import QSize
 from apps import InvestApp as invApp
 from openapi_client import openapi
-
+from cryptography.fernet import Fernet
+import cryptography
 # pyuic5 InvestApp.ui -o InvestApp.py
 # pip install auto-py-to-exe
 # auto-py-to-exe
@@ -25,6 +27,7 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         self.actionInfo.triggered.connect(self.openDialogBox)
         self.actionExport_Token.triggered.connect(self.file_save)
         self.actionImport_Token.triggered.connect(self.file_load)
+        self.actionGenerate_Key.triggered.connect(self.generate_encrypt_key)
 
     def openDialogBox(self):
         # Dialog box for providing some information about this app
@@ -33,27 +36,71 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         \nAlso all information about stocks are getting from Tinkoff Investment App \
         For better using you need to provide your Tinkoff Token from this page: \
         https://www.tinkoff.ru/invest/settings/')
-    
+
     def file_save(self):
         try:
-            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save API Token to file', "", "files TXT (*.txt)")
-            file = open(name[0],'w')
+            # Get key
+            name_file = 'encryption.key'
+            with open(name_file, 'rb') as filekey:
+                key = filekey.read()
+            # using the generated key
+            fernet = Fernet(key)
+            name_file = QtWidgets.QFileDialog.getSaveFileName(
+                self, 'Save API Token to file', "", "files TXT (*.txt)")
+            file = open(name_file[0], 'w')
             text = self.apiTokenEditField.toPlainText()
             file.write(text)
             file.close()
+            # Encrypt
+            with open(name_file[0], 'rb') as file:
+                original = file.read()
+            # encrypting the file
+            encrypted = fernet.encrypt(original)
+            # opening the file in write mode and
+            # writing the encrypted data
+            with open(name_file[0], 'wb') as encrypted_file:
+                encrypted_file.write(encrypted)
         except FileNotFoundError:
-            self.customDialogBox("Error", "File not found. Try different file")
-
+            if name_file == 'encryption.key':
+                self.customDialogBox(
+                    "Error", "Encryption key must be in the working directory. Not found.")
+            else:
+                self.customDialogBox(
+                    "Error", "File not found. Try different file")
 
     def file_load(self):
         try:
-            name = QtWidgets.QFileDialog.getOpenFileName(self, 'Load API Token from file', "", "files TXT (*.txt)")
-            file = open(name[0],'r')
+            # Get key
+            name_file = 'encryption.key'
+            with open(name_file, 'rb') as filekey:
+                key = filekey.read()
+            # using the generated key
+            fernet = Fernet(key)
+            name_file = QtWidgets.QFileDialog.getOpenFileName(
+                self, 'Load API Token from file', "", "files TXT (*.txt)")
+            file = open(name_file[0], 'rb')
             with file:
                 text = file.read()
-                self.apiTokenEditField.setText(text)
+                decrypted = fernet.decrypt(text)
+                self.apiTokenEditField.setText(decrypted.decode("utf-8"))
         except FileNotFoundError:
-            self.customDialogBox("Error", "File not found. Try different file")
+            if name_file == 'encryption.key':
+                self.customDialogBox(
+                    "Error", "Encryption key must be in the working directory. Not found.")
+            else:
+                self.customDialogBox(
+                    "Error", "File not found. Try different file")
+        except cryptography.fernet.InvalidToken:
+            self.customDialogBox("Encryption error",
+                                 "Invalid encryption key. Try different one")
+
+    def generate_encrypt_key(self):
+        key = Fernet.generate_key()
+        # string the key in a file
+        with open('encryption.key', 'wb') as filekey:
+            filekey.write(key)
+        self.customDialogBox("Encryption", "Encryption key was successfuly generated in the working directory. \
+            \r\nSave it and store it in secure place for further use.")
 
     def customDialogBox(self, title, text):
         # Custom dialog box

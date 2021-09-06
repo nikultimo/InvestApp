@@ -10,3 +10,6 @@ dist
 
 # Text files
 *.txt
+
+# Encryption keys
+*.key

@@ -440,6 +440,7 @@ gridline-color: rgb(0, 0, 0);</string>
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionGenerate_Key"/>
     <addaction name="actionImport_Token"/>
     <addaction name="actionExport_Token"/>
    </widget>
@@ -454,7 +455,7 @@ gridline-color: rgb(0, 0, 0);</string>
   </action>
   <action name="actionImport_Token">
    <property name="text">
-    <string>Import Token</string>
+    <string>Import Token API</string>
    </property>
    <property name="shortcutVisibleInContextMenu">
     <bool>false</bool>
@@ -462,7 +463,12 @@ gridline-color: rgb(0, 0, 0);</string>
   </action>
   <action name="actionExport_Token">
    <property name="text">
-    <string>Export Token</string>
+    <string>Export Token API</string>
+   </property>
+  </action>
+  <action name="actionGenerate_Key">
+   <property name="text">
+    <string>Generate Encryption Key</string>
    </property>
   </action>
  </widget>
