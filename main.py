@@ -22,7 +22,9 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
             self.calculateEarning)  # Calculate your earnings button
         self.setWindowIcon(QtGui.QIcon('images/logo.ico'))  # Set logo to app
         # Add triggered event to help button
-        self.menuHelp.triggered.connect(self.openDialogBox)
+        self.actionInfo.triggered.connect(self.openDialogBox)
+        self.actionExport_Token.triggered.connect(self.file_save)
+        self.actionImport_Token.triggered.connect(self.file_load)
 
     def openDialogBox(self):
         # Dialog box for providing some information about this app
@@ -31,6 +33,27 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         \nAlso all information about stocks are getting from Tinkoff Investment App \
         For better using you need to provide your Tinkoff Token from this page: \
         https://www.tinkoff.ru/invest/settings/')
+    
+    def file_save(self):
+        try:
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save API Token to file', "", "files TXT (*.txt)")
+            file = open(name[0],'w')
+            text = self.apiTokenEditField.toPlainText()
+            file.write(text)
+            file.close()
+        except FileNotFoundError:
+            self.customDialogBox("Error", "File not found. Try different file")
+
+
+    def file_load(self):
+        try:
+            name = QtWidgets.QFileDialog.getOpenFileName(self, 'Load API Token from file', "", "files TXT (*.txt)")
+            file = open(name[0],'r')
+            with file:
+                text = file.read()
+                self.apiTokenEditField.setText(text)
+        except FileNotFoundError:
+            self.customDialogBox("Error", "File not found. Try different file")
 
     def customDialogBox(self, title, text):
         # Custom dialog box

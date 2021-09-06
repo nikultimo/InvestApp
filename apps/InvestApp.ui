@@ -426,19 +426,43 @@ gridline-color: rgb(0, 0, 0);</string>
    </property>
    <widget class="QMenu" name="menuHelp">
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(0, 0, 0);</string>
+     <string notr="true">selection-background-color: rgb(240, 240, 240);</string>
     </property>
     <property name="title">
      <string>Help</string>
     </property>
     <addaction name="actionInfo"/>
    </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="styleSheet">
+     <string notr="true">selection-background-color: rgb(240, 240, 240);</string>
+    </property>
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionImport_Token"/>
+    <addaction name="actionExport_Token"/>
+   </widget>
+   <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionInfo">
    <property name="text">
     <string>Info</string>
+   </property>
+  </action>
+  <action name="actionImport_Token">
+   <property name="text">
+    <string>Import Token</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionExport_Token">
+   <property name="text">
+    <string>Export Token</string>
    </property>
   </action>
  </widget>
