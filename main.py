@@ -1,6 +1,6 @@
 from os import error
 import sys
-from typing import Type  # sys needs to transfer argv to QApplication
+from typing import Type
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtCore import QSize
@@ -8,9 +8,6 @@ from apps import InvestApp as invApp
 from openapi_client import openapi
 from cryptography.fernet import Fernet
 import cryptography
-# pyuic5 InvestApp.ui -o InvestApp.py
-# pip install auto-py-to-exe
-# auto-py-to-exe
 
 
 class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
@@ -23,43 +20,33 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         self.calculateEarningPushButton.clicked.connect(
             self.calculateEarning)  # Calculate your earnings button
         self.setWindowIcon(QtGui.QIcon('images/logo.ico'))  # Set logo to app
-        # Add triggered event to help button
+        # Add triggered event to info button
         self.actionInfo.triggered.connect(self.openDialogBox)
-        self.actionExport_Token.triggered.connect(self.file_save)
-        self.actionImport_Token.triggered.connect(self.file_load)
+        # Add triggered event to Export API Token button
+        self.actionSave.triggered.connect(self.file_encrypt_save)
+        # Add triggered event to Import API Token button
+        self.actionLoad.triggered.connect(self.file_encrypt_load)
+        # Add triggered event to Generate Encryption key button
         self.actionGenerate_Key.triggered.connect(self.generate_encrypt_key)
 
     def openDialogBox(self):
         # Dialog box for providing some information about this app
         QtWidgets.QMessageBox.about(self, 'Information',
                                     'With this App you can define your earnings based on your stock. \
-        \nAlso all information about stocks are getting from Tinkoff Investment App \
-        For better using you need to provide your Tinkoff Token from this page: \
-        https://www.tinkoff.ru/invest/settings/')
+        \r\nAlso all information about stocks are getting from Tinkoff Investment App. \
+        \r\nFor better using you need to provide your Tinkoff API Token from this page: \
+        \r\nhttps://www.tinkoff.ru/invest/settings/')
 
-    def file_save(self):
+    def file_encrypt_save(self):
+        # Write API Token to file and encrypt 
+        # with generated / saved key.
         try:
             # Get key
-            name_file = 'encryption.key'
-            with open(name_file, 'rb') as filekey:
-                key = filekey.read()
-            # using the generated key
-            fernet = Fernet(key)
-            name_file = QtWidgets.QFileDialog.getSaveFileName(
-                self, 'Save API Token to file', "", "files TXT (*.txt)")
-            file = open(name_file[0], 'w')
-            text = self.apiTokenEditField.toPlainText()
-            file.write(text)
-            file.close()
+            fernet = self.get_key()
+            # Write token to file
+            self.write_token_to_file()
             # Encrypt
-            with open(name_file[0], 'rb') as file:
-                original = file.read()
-            # encrypting the file
-            encrypted = fernet.encrypt(original)
-            # opening the file in write mode and
-            # writing the encrypted data
-            with open(name_file[0], 'wb') as encrypted_file:
-                encrypted_file.write(encrypted)
+            self.encrypt_token(fernet)
         except FileNotFoundError:
             if name_file == 'encryption.key':
                 self.customDialogBox(
@@ -68,21 +55,14 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
                 self.customDialogBox(
                     "Error", "File not found. Try different file")
 
-    def file_load(self):
+    def file_encrypt_load(self):
+        # Read API Token from encrypted file, decrypt it using
+        # generated key and show in EditField
         try:
             # Get key
-            name_file = 'encryption.key'
-            with open(name_file, 'rb') as filekey:
-                key = filekey.read()
-            # using the generated key
-            fernet = Fernet(key)
-            name_file = QtWidgets.QFileDialog.getOpenFileName(
-                self, 'Load API Token from file', "", "files TXT (*.txt)")
-            file = open(name_file[0], 'rb')
-            with file:
-                text = file.read()
-                decrypted = fernet.decrypt(text)
-                self.apiTokenEditField.setText(decrypted.decode("utf-8"))
+            fernet = self.get_key()
+            # Decrypt token and shot it in EditField
+            self.decrypt_token(fernet)
         except FileNotFoundError:
             if name_file == 'encryption.key':
                 self.customDialogBox(
@@ -94,13 +74,56 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
             self.customDialogBox("Encryption error",
                                  "Invalid encryption key. Try different one")
 
+    def get_key(self):
+        # Generate encryption (decryption) key
+        global name_file
+        name_file = 'encryption.key'
+        with open(name_file, 'rb') as filekey:
+            key = filekey.read()
+        # using the generated key
+        fernet = Fernet(key)
+        return fernet
+
+    def write_token_to_file(self):
+        # Write token from EditField to file
+        global name_file
+        name_file = QtWidgets.QFileDialog.getSaveFileName(
+            self, 'Save API Token to file', "", "files TXT (*.txt)")
+        file = open(name_file[0], 'w')
+        text = self.apiTokenEditField.toPlainText()
+        file.write(text)
+        file.close()
+
+    def encrypt_token(self, fernet):
+        # Encrypt file with saved token
+        global name_file
+        with open(name_file[0], 'rb') as file:
+            original = file.read()
+            # encrypting the file
+        encrypted = fernet.encrypt(original)
+        # opening the file in write mode and
+        # writing the encrypted data
+        with open(name_file[0], 'wb') as encrypted_file:
+            encrypted_file.write(encrypted)
+
+    def decrypt_token(self, fernet):
+        # Decrypt file with saved token and show it at apiTokenEditField
+        name_file = QtWidgets.QFileDialog.getOpenFileName(
+            self, 'Load API Token from file', "", "files TXT (*.txt)")
+        file = open(name_file[0], 'rb')
+        with file:
+            text = file.read()
+            decrypted = fernet.decrypt(text)
+            self.apiTokenEditField.setText(decrypted.decode("utf-8"))
+
     def generate_encrypt_key(self):
+        # Generate encryption key and show dialog box
         key = Fernet.generate_key()
         # string the key in a file
         with open('encryption.key', 'wb') as filekey:
             filekey.write(key)
         self.customDialogBox("Encryption", "Encryption key was successfuly generated in the working directory. \
-            \r\nSave it and store it in secure place for further use.")
+            \r\nSave and move it to secure place for further use.")
 
     def customDialogBox(self, title, text):
         # Custom dialog box

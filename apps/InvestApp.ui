@@ -217,7 +217,7 @@ p, li { white-space: pre-wrap; }
        <string notr="true">background-color: rgb(74, 214, 163);</string>
       </property>
       <property name="text">
-       <string>Get real stock cost from Tinkoff API</string>
+       <string>Get data from Tinkoff</string>
       </property>
      </widget>
     </item>
@@ -440,9 +440,16 @@ gridline-color: rgb(0, 0, 0);</string>
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuTinkoff_API_Token">
+     <property name="title">
+      <string>Tinkoff API Token</string>
+     </property>
+     <addaction name="actionLoad"/>
+     <addaction name="actionSave"/>
+    </widget>
     <addaction name="actionGenerate_Key"/>
-    <addaction name="actionImport_Token"/>
-    <addaction name="actionExport_Token"/>
+    <addaction name="menuTinkoff_API_Token"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
@@ -453,22 +460,54 @@ gridline-color: rgb(0, 0, 0);</string>
     <string>Info</string>
    </property>
   </action>
-  <action name="actionImport_Token">
-   <property name="text">
-    <string>Import Token API</string>
-   </property>
-   <property name="shortcutVisibleInContextMenu">
-    <bool>false</bool>
-   </property>
-  </action>
   <action name="actionExport_Token">
    <property name="text">
-    <string>Export Token API</string>
+    <string>Export API Token</string>
    </property>
   </action>
   <action name="actionGenerate_Key">
    <property name="text">
     <string>Generate Encryption Key</string>
+   </property>
+  </action>
+  <action name="actionImport">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionImport_2">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionImport_3">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionExport_2">
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionImport_4">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Export</string>
    </property>
   </action>
  </widget>
