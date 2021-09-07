@@ -215,7 +215,6 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
             stock_name = self.stockNameTextEdit.currentText()
             _, average, lots, currency = self.parser_stock(stock_name)
             stock_price_now = float(self.stockRealCostTextEdit.toPlainText())
-            print(currency)
             if currency == 'USD':
                 res = (lots*(stock_price_now - average))*self.usdToRub()
             else:
