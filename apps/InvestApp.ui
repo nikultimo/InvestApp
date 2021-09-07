@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>420</width>
-    <height>460</height>
+    <height>440</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>420</width>
-    <height>460</height>
+    <height>440</height>
    </size>
   </property>
   <property name="baseSize">
@@ -57,7 +57,19 @@ color: rgb(0, 0, 0);</string>
     <string notr="true"/>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" colspan="2">
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>3</number>
+    </property>
+    <property name="verticalSpacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0" colspan="3">
      <widget class="QLabel" name="yourApiTokenLabel">
       <property name="minimumSize">
        <size>
@@ -76,7 +88,7 @@ color: rgb(0, 0, 0);</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="2">
+    <item row="1" column="0" colspan="3">
      <widget class="QTextEdit" name="apiTokenEditField">
       <property name="minimumSize">
        <size>
@@ -100,9 +112,16 @@ color: rgb(0, 0, 0);</string>
        <string notr="true">background-color: rgb(238, 238, 238);
 color: rgb(0, 0, 0);</string>
       </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
      </widget>
     </item>
-    <item row="2" column="0">
+    <item row="2" column="0" colspan="2">
      <widget class="QLabel" name="stockNameLabel">
       <property name="minimumSize">
        <size>
@@ -121,7 +140,7 @@ color: rgb(0, 0, 0);</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
+    <item row="2" column="2">
      <widget class="QLabel" name="realStockCostLabel">
       <property name="minimumSize">
        <size>
@@ -141,42 +160,69 @@ color: rgb(0, 0, 0);</string>
      </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QTextEdit" name="stockNameTextEdit">
+     <widget class="QComboBox" name="stockNameTextEdit">
       <property name="minimumSize">
        <size>
-        <width>198</width>
+        <width>158</width>
         <height>30</height>
        </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(238, 238, 238);
 color: rgb(0, 0, 0);</string>
       </property>
-      <property name="html">
-       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;TAL&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
+      <item>
+       <property name="text">
+        <string>TAL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>VEON</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AAPL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>GCP</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>TTP</string>
+       </property>
+      </item>
      </widget>
     </item>
     <item row="3" column="1">
+     <widget class="QPushButton" name="uploadStocksNamespushButton">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(74, 214, 163);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>download.png</normaloff>download.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
      <widget class="QTextEdit" name="stockRealCostTextEdit">
       <property name="minimumSize">
        <size>
-        <width>198</width>
+        <width>190</width>
         <height>30</height>
        </size>
       </property>
@@ -199,7 +245,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="4" column="0" colspan="2">
+    <item row="4" column="0" colspan="3">
      <widget class="QPushButton" name="getCostFromYFPushButton">
       <property name="minimumSize">
        <size>
@@ -225,7 +271,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="amountOfStocksLabel">
       <property name="minimumSize">
        <size>
-        <width>400</width>
+        <width>198</width>
         <height>15</height>
        </size>
       </property>
@@ -240,11 +286,30 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
+    <item row="5" column="2">
+     <widget class="QLabel" name="averageCostOfStockLabel">
+      <property name="minimumSize">
+       <size>
+        <width>198</width>
+        <height>15</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>15</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Average cost of stock</string>
+      </property>
+     </widget>
+    </item>
     <item row="6" column="0" colspan="2">
      <widget class="QTextEdit" name="stockAmountTextEdit">
       <property name="minimumSize">
        <size>
-        <width>400</width>
+        <width>195</width>
         <height>30</height>
        </size>
       </property>
@@ -267,30 +332,11 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="7" column="0" colspan="2">
-     <widget class="QLabel" name="averageCostOfStockLabel">
-      <property name="minimumSize">
-       <size>
-        <width>400</width>
-        <height>15</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>15</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Average cost of stock</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0" colspan="2">
+    <item row="6" column="2">
      <widget class="QTextEdit" name="stockAverageTextEdit">
       <property name="minimumSize">
        <size>
-        <width>400</width>
+        <width>195</width>
         <height>30</height>
        </size>
       </property>
@@ -313,7 +359,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="9" column="0" colspan="2">
+    <item row="7" column="0" colspan="3">
      <widget class="QPushButton" name="calculateEarningPushButton">
       <property name="minimumSize">
        <size>
@@ -344,7 +390,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="10" column="0" colspan="2">
+    <item row="8" column="0" colspan="3">
      <widget class="Line" name="line">
       <property name="minimumSize">
        <size>
@@ -363,7 +409,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="11" column="0" colspan="2">
+    <item row="9" column="0" colspan="3">
      <widget class="QLabel" name="youWillEarnLabel">
       <property name="minimumSize">
        <size>
@@ -382,7 +428,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="12" column="0" colspan="2">
+    <item row="10" column="0" colspan="3">
      <widget class="QTextEdit" name="earningTextEdit">
       <property name="minimumSize">
        <size>

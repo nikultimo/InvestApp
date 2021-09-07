@@ -3,6 +3,7 @@ import sys
 from typing import Type
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
+from PyQt5 import QtCore
 from PyQt5.QtCore import QSize
 from apps import InvestApp as invApp
 from openapi_client import openapi
@@ -20,6 +21,13 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         self.calculateEarningPushButton.clicked.connect(
             self.calculateEarning)  # Calculate your earnings button
         self.setWindowIcon(QtGui.QIcon('images/logo.ico'))  # Set logo to app
+        # Set logo to button for getting stocks names
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("images/download.png"),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.uploadStocksNamespushButton.setIcon(icon)
+        # Get all names for stocks. Show it in drop down menu
+        self.uploadStocksNamespushButton.clicked.connect(self.get_all_stocks)
         # Add triggered event to info button
         self.actionInfo.triggered.connect(self.openDialogBox)
         # Add triggered event to Export API Token button
@@ -38,7 +46,7 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         \r\nhttps://www.tinkoff.ru/invest/settings/')
 
     def file_encrypt_save(self):
-        # Write API Token to file and encrypt 
+        # Write API Token to file and encrypt
         # with generated / saved key.
         try:
             # Get key
@@ -132,7 +140,7 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
     def getRealCost(self):
         # Get real cost of stock
         try:
-            stock_name = self.stockNameTextEdit.toPlainText()
+            stock_name = self.stockNameTextEdit.currentText()
             earn, average, lots = self.parser_stock(stock_name)
             itog = earn / lots + average
             itog = round(itog, 6)
@@ -153,6 +161,25 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         earn, average, lots = self.parser_stock('USD000UTSTOM')
         gain = earn / lots + average
         return gain
+
+    def get_all_stocks(self):
+        try:
+            _translate = QtCore.QCoreApplication.translate
+            # Grab all stocks to drop down box
+            token = self.apiTokenEditField.toPlainText()
+            client = openapi.api_client(token)
+            pf = client.portfolio.portfolio_get()
+            k = 0
+            index = 0
+            for i in range(self.stockNameTextEdit.count(), -1, -1):
+                self.stockNameTextEdit.removeItem(i)
+            while k <= len(pf.payload.positions) - 1:
+                self.stockNameTextEdit.addItem("")
+                name = pf.payload.positions[k].ticker
+                self.stockNameTextEdit.setItemText(k, name)
+                k += 1
+        except:
+            self.customDialogBox('Error', 'Not the right Token API')
 
     def parser_stock(self, stock_name):
         # Get stock info from Tinkoff API Token
@@ -180,7 +207,7 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
     def calculateEarning(self):
         # Calculate your earning
         try:
-            stock_name = self.stockNameTextEdit.toPlainText()
+            stock_name = self.stockNameTextEdit.currentText()
             earn, average, lots = self.parser_stock(stock_name)
             stock_price_now = float(self.stockRealCostTextEdit.toPlainText())
             res = (lots*(stock_price_now - average))*self.usdToRub()
