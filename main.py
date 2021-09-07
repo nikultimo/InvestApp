@@ -141,7 +141,7 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         # Get real cost of stock
         try:
             stock_name = self.stockNameTextEdit.currentText()
-            earn, average, lots = self.parser_stock(stock_name)
+            earn, average, lots, _ = self.parser_stock(stock_name)
             itog = earn / lots + average
             itog = round(itog, 6)
             self.stockRealCostTextEdit.setPlainText("{0}".format(str(itog)))
@@ -158,7 +158,7 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
 
     def usdToRub(self):
         # Convert usd to rub
-        earn, average, lots = self.parser_stock('USD000UTSTOM')
+        earn, average, lots, _ = self.parser_stock('USD000UTSTOM')
         gain = earn / lots + average
         return gain
 
@@ -189,6 +189,10 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
         state = False
         k = 0
         index = 0
+        earn = 0
+        average = 0
+        lots = 0
+        currency = ''
         while state != True and k <= len(pf.payload.positions) - 1:
             if pf.payload.positions[k].ticker == stock_name:
                 index = k
@@ -202,15 +206,20 @@ class ExampleApp(QtWidgets.QMainWindow, invApp.Ui_InvestApp):
             earn = pf.payload.positions[index].expected_yield.value
             average = pf.payload.positions[index].average_position_price.value
             lots = pf.payload.positions[index].balance
-            return float(earn), float(average), float(lots)
+            currency = pf.payload.positions[index].average_position_price.currency
+        return float(earn), float(average), float(lots), currency
 
     def calculateEarning(self):
         # Calculate your earning
         try:
             stock_name = self.stockNameTextEdit.currentText()
-            earn, average, lots = self.parser_stock(stock_name)
+            _, average, lots, currency = self.parser_stock(stock_name)
             stock_price_now = float(self.stockRealCostTextEdit.toPlainText())
-            res = (lots*(stock_price_now - average))*self.usdToRub()
+            print(currency)
+            if currency == 'USD':
+                res = (lots*(stock_price_now - average))*self.usdToRub()
+            else:
+                res = lots*(stock_price_now - average)
             self.earningTextEdit.setPlainText("{0}".format(str(res)))
         except TypeError:
             self.customDialogBox('Error', 'Not the right Token API')
